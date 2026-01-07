@@ -51,35 +51,18 @@ const buildCommentTree = (comments) => {
     return commentTree;
 };
 
-// ============================================================
-// API GET: LẤY DANH SÁCH BÀI ĐĂNG (HOME FEED / POPULAR / SEARCH)
-// ============================================================
+// ... (API GET / - Lấy danh sách bài đăng giữ nguyên) ...
 router.get('/', async (req, res) => {
     try {
         const { community, sort, search } = req.query;
-        
-        // 1. Xử lý lấy User ID từ token (Optional Auth)
-        let currentUserId = null;
-        if (req.headers.authorization) {
-            const token = req.headers.authorization.split(' ')[1];
-            try {
-                const decoded = jwt.verify(token, JWT_SECRET); 
-                currentUserId = decoded.userId;
-            } catch (e) {} 
-        }
-
-        // 2. Xây dựng câu Order By
         let orderByClause = 'p.created_at DESC'; 
         
         if (sort === 'popular') {
-            orderByClause = `
-                (COALESCE(SUM(v.direction), 0) + (SELECT COUNT(*) FROM Comments c WHERE c.post_id = p.id) + (UNIX_TIMESTAMP(p.created_at) / 450000)) DESC
-            `;
+            orderByClause = `(COALESCE(SUM(v.direction), 0) + (SELECT COUNT(*) FROM Comments c WHERE c.post_id = p.id) + (UNIX_TIMESTAMP(p.created_at) / 450000)) DESC`;
         } else if (sort === 'top') {
             orderByClause = `score DESC`;
         }
 
-        // 3. Câu SQL Cơ bản
         let sql = `
             SELECT p.id, p.title, p.url, p.text_content, p.created_at, p.community, u.username,
             COALESCE(SUM(v.direction), 0) as score,
@@ -92,28 +75,15 @@ router.get('/', async (req, res) => {
         const params = [];
         const whereConditions = [];
 
-        // 4. Các bộ lọc (Filter)
-        
-        // a. Lọc theo Cộng đồng cụ thể (/r/congnghe)
         if (community) {
             whereConditions.push(`p.community = ?`);
             params.push(community);
         }
-        
-        // b. Tìm kiếm (?search=tukhoa)
         if (search) {
             whereConditions.push(`(p.title LIKE ? OR p.text_content LIKE ?)`);
             params.push(`%${search}%`, `%${search}%`);
         }
 
-        // c. LOGIC HOME FEED (ĐÃ SỬA: Hiển thị tất cả nếu không có filter đặc biệt)
-        // Trước đây: Chỉ hiện bài đã follow -> Giờ bỏ điều kiện này để hiện tất cả bài mới nhất
-        /* if (!community && !search && !sort && currentUserId) {
-             // ĐÃ BỎ ĐOẠN LỌC THEO FOLLOW/JOIN ĐỂ HIỆN TẤT CẢ
-        }
-        */
-
-        // Ghép điều kiện WHERE
         if (whereConditions.length > 0) {
             sql += ` WHERE ` + whereConditions.join(' AND ');
         }
@@ -151,8 +121,9 @@ router.get('/:id', async (req, res) => {
             return res.status(404).json({ message: 'Không tìm thấy bài đăng' });
         }
 
+        // [SỬA] Thêm u.avatar_url vào câu SELECT
         const [commentRows] = await db.execute(
-            `SELECT c.id, c.content, c.created_at, u.username, c.parent_comment_id
+            `SELECT c.id, c.content, c.created_at, u.username, u.avatar_url, c.parent_comment_id
              FROM Comments c
              JOIN Users u ON c.user_id = u.id
              WHERE c.post_id = ?
@@ -170,9 +141,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// ============================================================
-// API POST: VOTE BÀI ĐĂNG
-// ============================================================
+// ... (API POST Vote giữ nguyên) ...
 router.post('/:id/vote', authMiddleware, async (req, res) => {
     try {
         const { id: postId } = req.params;
@@ -225,8 +194,9 @@ router.post('/:id/comments', authMiddleware, async (req, res) => {
             [content, userId, postId, parent_comment_id || null]
         );
 
+        // [SỬA] Thêm u.avatar_url vào câu SELECT trả về
         const [newCommentRows] = await db.execute(
-             `SELECT c.id, c.content, c.created_at, u.username, c.parent_comment_id
+             `SELECT c.id, c.content, c.created_at, u.username, u.avatar_url, c.parent_comment_id
               FROM Comments c
               JOIN Users u ON c.user_id = u.id
               WHERE c.id = ?`,
@@ -240,9 +210,7 @@ router.post('/:id/comments', authMiddleware, async (req, res) => {
     }
 });
 
-// ============================================================
-// API POST: TẠO BÀI ĐĂNG
-// ============================================================
+// ... (API POST Tạo bài đăng giữ nguyên) ...
 router.post('/', authMiddleware, upload.single('image'), async (req, res) => {
     try {
         const { title, url, text_content, community } = req.body;
@@ -265,7 +233,6 @@ router.post('/', authMiddleware, upload.single('image'), async (req, res) => {
         
         const newPostId = result.insertId;
 
-        // Gửi Thông Báo (Tùy chọn)
         const [followers] = await db.execute(
             'SELECT follower_id FROM Follows WHERE following_id = ?',
             [userId]

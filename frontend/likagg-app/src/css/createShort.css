@@ -1,0 +1,140 @@
+.create-short-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.create-short-header h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+.upload-area-modern {
+    border: 3px dashed #e0e0e0;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #fafafa;
+    margin-bottom: 25px;
+}
+
+.upload-area-modern:hover {
+    border-color: #0079d3;
+    background: #f0f8ff;
+}
+
+.upload-icon-large {
+    font-size: 48px;
+    color: #0079d3;
+    margin-bottom: 15px;
+}
+
+.upload-text-main {
+    font-size: 18px;
+    font-weight: 600;
+    color: #555;
+}
+
+.upload-text-sub {
+    font-size: 14px;
+    color: #888;
+    margin-top: 5px;
+}
+
+.video-preview-container {
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto 25px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.video-preview-container video {
+    width: 100%;
+    display: block;
+}
+
+.remove-video-btn-modern {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: background 0.2s;
+}
+
+.remove-video-btn-modern:hover {
+    background: rgba(255, 0, 0, 0.8);
+}
+
+.caption-input-modern {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    resize: none;
+    margin-bottom: 25px;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+.caption-input-modern:focus {
+    outline: none;
+    border-color: #0079d3;
+}
+
+.action-buttons-modern {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.btn-modern {
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.btn-cancel-modern {
+    background: #f0f2f5;
+    color: #555;
+}
+
+.btn-cancel-modern:hover {
+    background: #e4e6e9;
+}
+
+.btn-submit-modern {
+    background: #0079d3;
+    color: white;
+}
+
+.btn-submit-modern:hover:not(:disabled) {
+    background: #005fa3;
+}
+
+.btn-submit-modern:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}

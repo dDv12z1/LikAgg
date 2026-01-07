@@ -10,7 +10,8 @@ import PostDetailPage from './pages/postDetailPage';
 import CreateCommunity from './pages/createCommunity';
 import UserProfile from './pages/userProfile';
 import UserSettings from './pages/userSetting';
-
+import CreateShort from './pages/createShort'; // Import file vừa tạo
+import ShortsFeedPage from './pages/shortsFeedPage'; // Import trang mới
 // Import các trang mới
 import AboutPage from './pages/aboutPage';
 import InfoPage from './pages/infoPage'; // Trang dùng chung
@@ -35,6 +36,7 @@ function App() {
           <Route path="/post/:id" element={<PostDetailPage />} />
           <Route path="/u/:username" element={<UserProfile />} />
           <Route path="/settings" element={<UserSettings />} />
+          <Route path="/shorts" element={<ShortsFeedPage />} />
 
           {/* --- CÁC ROUTE RESOURCE MỚI --- */}
           <Route path="/about" element={<AboutPage />} />
@@ -50,6 +52,7 @@ function App() {
           <Route path="/blog" element={<InfoPage type="default" />} />
           <Route path="/careers" element={<InfoPage type="default" />} />
           <Route path="/press" element={<InfoPage type="default" />} />
+          <Route path="/create-short" element={<CreateShort />} />
 
         </Routes>
       </div>

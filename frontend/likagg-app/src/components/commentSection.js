@@ -11,7 +11,6 @@ const CommentNode = ({ comment, postId, onReplySubmit }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!replyContent.trim()) return;
-        // Gọi hàm của cha để xử lý submit
         onReplySubmit(replyContent, comment.id); 
         setReplyContent('');
         setShowReplyForm(false);
@@ -19,15 +18,29 @@ const CommentNode = ({ comment, postId, onReplySubmit }) => {
 
     return (
         <div style={{ display: 'flex', gap: '10px', marginTop: '15px' }}>
-            {/* Đường kẻ chỉ dẫn cấp độ (Thread line) */}
+            {/* Đường kẻ chỉ dẫn cấp độ */}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                
+                {/* [SỬA] Hiển thị Avatar */}
                 <div style={{
-                    width: '24px', height: '24px', borderRadius: '50%', flexShrink: 0,
-                    backgroundColor: '#ff4500', color: 'white', display: 'flex', 
-                    alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '10px'
+                    width: '32px', height: '32px', borderRadius: '50%', flexShrink: 0,
+                    backgroundColor: '#e0e0e0', display: 'flex', 
+                    alignItems: 'center', justifyContent: 'center', overflow: 'hidden'
                 }}>
-                    {comment.username ? comment.username.charAt(0).toUpperCase() : 'U'}
+                    {comment.avatar_url ? (
+                        <img 
+                            src={comment.avatar_url.startsWith('http') ? comment.avatar_url : `http://localhost:5001${comment.avatar_url}`}
+                            alt={comment.username}
+                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            onError={(e) => { e.target.style.display = 'none'; }}
+                        />
+                    ) : (
+                        <span style={{ fontWeight: 'bold', fontSize: '12px', color: '#555' }}>
+                            {comment.username ? comment.username.charAt(0).toUpperCase() : 'U'}
+                        </span>
+                    )}
                 </div>
+
                 {/* Kẻ dọc nếu có con */}
                 {comment.children && comment.children.length > 0 && (
                     <div style={{ width: '2px', backgroundColor: '#edeff1', flex: 1, marginTop: '5px' }}></div>
@@ -35,13 +48,11 @@ const CommentNode = ({ comment, postId, onReplySubmit }) => {
             </div>
             
             <div style={{ flex: 1 }}>
-                {/* Nội dung comment */}
                 <div style={{ backgroundColor: '#f6f7f8', padding: '8px 12px', borderRadius: '8px', display: 'inline-block' }}>
                     <div style={{ fontWeight: 'bold', fontSize: '12px', color: '#1c1c1c' }}>{comment.username}</div>
                     <div style={{ fontSize: '14px', color: '#1c1c1c' }}>{comment.content}</div>
                 </div>
                 
-                {/* Actions */}
                 <div style={{ fontSize: '12px', color: '#878a8c', marginLeft: '5px', marginTop: '4px', display: 'flex', gap: '10px', alignItems: 'center' }}>
                     <span>{new Date(comment.created_at).toLocaleDateString()}</span>
                     {user && (
@@ -54,7 +65,6 @@ const CommentNode = ({ comment, postId, onReplySubmit }) => {
                     )}
                 </div>
 
-                {/* Form Reply */}
                 {showReplyForm && (
                     <form onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                         <textarea
@@ -69,7 +79,6 @@ const CommentNode = ({ comment, postId, onReplySubmit }) => {
                     </form>
                 )}
 
-                {/* --- ĐỆ QUY: Render con của comment này --- */}
                 {comment.children && comment.children.length > 0 && (
                     <div className="comment-children">
                         {comment.children.map(child => (
@@ -87,30 +96,24 @@ const CommentNode = ({ comment, postId, onReplySubmit }) => {
     );
 };
 
-// --- COMPONENT CHÍNH ---
 const CommentSection = ({ postId, initialComments = [] }) => {
     const { user, api } = useContext(AuthContext);
-    const [comments, setComments] = useState(initialComments); // Đây là cấu trúc Cây
+    const [comments, setComments] = useState(initialComments);
     const [newComment, setNewComment] = useState('');
 
-    // Cập nhật comments state khi initialComments thay đổi (quan trọng khi load lại trang hoặc mở modal)
     useEffect(() => {
         setComments(initialComments);
     }, [initialComments]);
 
-    // Hàm xử lý gửi comment (Gốc hoặc Reply)
     const handleSubmit = async (content, parentId = null) => {
         try {
             const token = localStorage.getItem('token');
-            // Gửi lên server
-            const response = await api.post(
+            await api.post(
                 `/api/posts/${postId}/comments`, 
                 { content, parent_comment_id: parentId }, 
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             
-            // SAU KHI GỬI THÀNH CÔNG: Tải lại toàn bộ comment để lấy cấu trúc cây mới nhất
-            // Đây là cách an toàn nhất để đảm bảo dữ liệu hiển thị đúng với DB
             const refreshRes = await api.get(`/api/posts/${postId}`);
             setComments(refreshRes.data.comments);
 
@@ -122,7 +125,6 @@ const CommentSection = ({ postId, initialComments = [] }) => {
 
     return (
         <div style={{ borderTop: '1px solid #eee', paddingTop: '15px' }}>
-            {/* Form nhập Comment Gốc */}
             {user && (
                 <div style={{ marginBottom: '20px' }}>
                     <textarea
@@ -141,15 +143,10 @@ const CommentSection = ({ postId, initialComments = [] }) => {
                 </div>
             )}
 
-            {/* Danh sách Comment (Cây) */}
             <div>
                 {comments && comments.length > 0 ? (
-                    // Logic hiển thị: Nếu backend đã trả về cây, thì các node con đã nằm trong .children
-                    // Chúng ta chỉ cần map qua các node gốc (không có parent_comment_id).
-                    // Nếu backend trả về phẳng (chưa xử lý cây), chúng ta cần hàm buildTree ở frontend (nhưng tốt nhất là làm ở backend như đã hướng dẫn).
-                    // Ở đây giả định backend ĐÃ trả về cây (như code postRoutes.js trước đó).
                     comments
-                        .filter(comment => !comment.parent_comment_id) // Chỉ render comment cấp 1
+                        .filter(comment => !comment.parent_comment_id)
                         .map(comment => (
                             <CommentNode 
                                 key={comment.id} 

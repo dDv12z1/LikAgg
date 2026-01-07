@@ -1,0 +1,23 @@
+.shorts-feed-container {
+    width: 100%;
+    height: 100vh; /* Chiếm toàn bộ chiều cao màn hình */
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory; /* Bắt buộc snap theo chiều dọc */
+    background-color: #000;
+}
+
+/* Ẩn thanh cuộn cho đẹp (tùy chọn) */
+.shorts-feed-container::-webkit-scrollbar {
+    display: none;
+}
+.shorts-feed-container {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.short-snap-item {
+    width: 100%;
+    height: 100vh; /* Mỗi item cao đúng bằng màn hình */
+    scroll-snap-align: start; /* Điểm snap là bắt đầu item */
+    position: relative;
+}

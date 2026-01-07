@@ -86,10 +86,6 @@ const Navbar = () => {
                             <button className="nav-icon-btn mobile-hide" title="Popular" onClick={() => navigate('/popular')}>
                                 <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
                             </button>
-                            <button className="nav-icon-btn mobile-hide" title="Chat">
-                                <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
-                            </button>
-                            
                             <button className="nav-icon-btn" title="Create" onClick={() => navigate('/submit')}>
                                 <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" /></svg>
                             </button>

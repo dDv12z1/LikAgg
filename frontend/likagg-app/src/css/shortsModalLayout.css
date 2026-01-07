@@ -1,0 +1,101 @@
+/* Container chính của Modal */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0,0,0,0.85); z-index: 9999;
+    display: flex; justify-content: center; alignItems: center;
+    backdrop-filter: blur(5px);
+}
+
+/* Nút đóng */
+.modal-close-btn {
+    position: absolute; top: 20px; left: 20px;
+    background: rgba(255,255,255,0.2); color: white; border: none;
+    border-radius: 50%; width: 40px; height: 40px; font-size: 20px;
+    cursor: pointer; z-index: 10001; display: flex; align-items: center; justify-content: center;
+}
+
+/* --- LAYOUT CONTAINER (Chứa cả Video và Comment) --- */
+.shorts-layout-container {
+    display: flex;
+    width: auto;
+    height: 90vh;
+    max-height: 800px;
+    background: #000;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+/* --- PHẦN VIDEO (Bên trái) --- */
+.video-section {
+    width: 450px; /* Cố định chiều rộng video dạng điện thoại */
+    height: 100%;
+    position: relative;
+    background: black;
+    /* Giữ tỷ lệ khung hình nếu cần, hoặc để auto theo chiều cao */
+    aspect-ratio: 9/16; 
+}
+
+/* --- PHẦN BÌNH LUẬN (Bên phải - Desktop) --- */
+.comments-sidebar {
+    width: 350px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid #333;
+}
+
+/* Header bình luận */
+.comments-header {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    font-weight: bold;
+    display: flex; justify-content: space-between; align-items: center;
+}
+
+.comments-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.comment-input-box {
+    padding: 15px;
+    border-top: 1px solid #eee;
+    background: #fff;
+}
+
+/* --- RESPONSIVE (Mobile/Tablet) --- */
+@media (max-width: 900px) {
+    /* Khi màn hình nhỏ, ẩn sidebar đi để chuyển sang chế độ popup */
+    .comments-sidebar {
+        position: absolute; /* Đè lên video */
+        bottom: 0; left: 0; right: 0; /* Căn chỉnh trong khung cha (.shorts-layout-container) */
+        width: 100%; /* Chiều rộng bằng khung cha (tức là bằng video) */
+        height: 60%; /* Chiếm 60% chiều cao video */
+        border-radius: 16px 16px 0 0;
+        z-index: 20;
+        transform: translateY(100%); /* Mặc định ẩn xuống dưới */
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .comments-sidebar.open {
+        transform: translateY(0); /* Trượt lên */
+    }
+
+    /* Nút đóng bình luận trên mobile */
+    .mobile-close-comment {
+        display: block;
+        cursor: pointer;
+    }
+}
+
+@media (min-width: 901px) {
+    .mobile-close-comment {
+        display: none; /* Ẩn nút đóng trên desktop vì nó luôn hiện */
+    }
+    .comments-sidebar {
+        transform: none !important; /* Desktop luôn hiện */
+    }
+}

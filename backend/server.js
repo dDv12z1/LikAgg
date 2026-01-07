@@ -9,6 +9,7 @@ import userRoutes from './routes/userRoutes.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import nodemailer from 'nodemailer'; 
+import shortRoutes from './routes/shortRoutes.js'; // <--- Thêm dòng này
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -109,6 +110,7 @@ app.post('/api/auth/forgot-password', async (req, res) => {
 app.use('/api/posts', postRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/communities', communityRoutes); 
+app.use('/api/shorts', shortRoutes); // <--- Thêm dòng này
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`Backend đang chạy trên cổng ${PORT} (với ES Modules)`));

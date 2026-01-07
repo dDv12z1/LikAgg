@@ -1,0 +1,159 @@
+.create-post-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    max-width: 700px;
+    margin: 30px auto;
+    border: 1px solid #f0f2f5;
+    box-sizing: border-box; /* Quan trọng */
+}
+
+.cp-header {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1b;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.cp-input-group {
+    margin-bottom: 20px;
+}
+
+.cp-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.cp-input, .cp-textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background-color: #fcfcfc;
+    box-sizing: border-box; 
+    font-family: inherit;
+}
+
+.cp-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.cp-attachments {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Cho phép nút xuống dòng trên mobile */
+}
+
+.cp-attach-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    background: white;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    transition: all 0.2s;
+}
+
+.cp-attach-btn.active {
+    background-color: #eef6ff;
+    color: #3b82f6;
+    border-color: #3b82f6;
+}
+
+.image-preview-area {
+    position: relative;
+    margin-top: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px dashed #ddd;
+    display: flex;
+    justify-content: center;
+    background-color: #fafafa;
+}
+
+.preview-img {
+    max-width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+}
+
+.remove-img-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.cp-submit-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.cp-submit-btn:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.cp-error {
+    color: #ef4444;
+    background-color: #fef2f2;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 600px) {
+    .create-post-container {
+        margin: 10px; /* Giảm margin ngoài */
+        padding: 20px; /* Giảm padding trong */
+    }
+    
+    .cp-header {
+        font-size: 20px;
+    }
+    
+    .cp-attachments {
+        gap: 10px;
+    }
+    
+    .cp-attach-btn {
+        flex: 1; /* Nút giãn đều */
+        justify-content: center;
+    }
+}

@@ -1,0 +1,137 @@
+.settings-container {
+    max-width: 800px;
+    margin: 30px auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    min-height: 500px;
+}
+
+/* Sidebar Menu bên trái */
+.settings-sidebar {
+    width: 250px;
+    background-color: #f6f7f8;
+    padding: 20px 0;
+    border-right: 1px solid #edeff1;
+}
+
+.settings-menu-item {
+    display: block;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1c1c1c;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.settings-menu-item:hover {
+    background-color: #e2e7eb;
+}
+
+.settings-menu-item.active {
+    background-color: #e2e7eb;
+    border-left: 4px solid #0079d3;
+    padding-left: 16px; /* Bù lại border */
+}
+
+/* Content bên phải */
+.settings-content {
+    flex: 1;
+    padding: 40px;
+}
+
+.settings-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #edeff1;
+    padding-bottom: 15px;
+}
+
+.settings-desc {
+    font-size: 12px;
+    color: #7c7c7c;
+    margin-bottom: 30px;
+}
+
+/* Form Styles */
+.setting-section {
+    margin-bottom: 30px;
+}
+
+.setting-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.setting-input, .setting-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #edeff1;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.setting-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.setting-note {
+    font-size: 12px;
+    color: #7c7c7c;
+}
+
+/* Avatar Upload */
+.avatar-preview {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #eee;
+    margin-bottom: 10px;
+    border: 2px solid #edeff1;
+}
+
+.file-input-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.btn-upload {
+    border: 1px solid #0079d3;
+    color: #0079d3;
+    background-color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* Save Button */
+.btn-save {
+    background-color: #0079d3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-save:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.success-msg { color: green; font-size: 14px; margin-bottom: 15px; }
+.error-msg { color: red; font-size: 14px; margin-bottom: 15px; }

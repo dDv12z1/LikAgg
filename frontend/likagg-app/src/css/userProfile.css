@@ -1,0 +1,252 @@
+/* src/css/userProfile.css */
+
+/* --- CONTAINER CHÍNH --- */
+.profile-container {
+    width: 100%;
+    max-width: 980px; /* Độ rộng chuẩn giống Reddit/FB */
+    margin: 20px auto;
+    background-color: transparent;
+    min-height: 100vh;
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1c1c1c;
+    padding: 0 10px; /* Khoảng đệm nhỏ cho mobile */
+}
+
+/* --- HEADER & COVER --- */
+.profile-header {
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    position: relative;
+    border: 1px solid #ccc;
+}
+
+.profile-cover {
+    height: 180px;
+    background: linear-gradient(90deg, #33aadd 0%, #0079d3 100%); /* Màu xanh tươi sáng hơn */
+    position: relative;
+}
+
+/* --- AVATAR & INFO --- */
+.profile-info-wrapper {
+    padding: 16px 24px;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+}
+
+.profile-avatar-container {
+    margin-top: -60px; /* Đẩy avatar lên */
+    margin-right: 20px;
+    position: relative;
+    z-index: 5;
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    background: #fff;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.profile-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 5px;
+}
+
+.profile-username {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+    color: #222;
+}
+
+.profile-handle {
+    font-size: 14px;
+    color: #7c7c7c;
+    font-weight: 500;
+}
+
+/* Nút Action */
+.profile-actions {
+    align-self: flex-start; /* Căn nút lên trên cùng hàng với tên */
+    margin-top: 10px;
+}
+
+.action-btn {
+    padding: 6px 24px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary {
+    background-color: #0079d3;
+    color: #fff;
+}
+.btn-primary:hover { background-color: #005fa3; }
+
+.btn-outline {
+    background-color: transparent;
+    border-color: #0079d3;
+    color: #0079d3;
+}
+.btn-outline:hover { background-color: #f5f8fa; }
+
+/* --- NAVIGATION TAB --- */
+.profile-nav {
+    display: flex;
+    padding: 0 20px;
+    border-top: 1px solid #eee;
+}
+
+.nav-item {
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #7c7c7c;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+.nav-item.active {
+    color: #0079d3;
+    border-bottom-color: #0079d3;
+}
+
+.nav-item:hover {
+    background-color: rgba(0, 121, 211, 0.05);
+    color: #0079d3;
+}
+
+/* --- CONTENT GRID --- */
+.profile-content {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+/* CỘT BÀI VIẾT (Feed) */
+.profile-feed {
+    flex: 1;
+    min-width: 0;
+}
+
+/* CỘT SIDEBAR */
+.profile-sidebar {
+    width: 312px;
+    flex-shrink: 0;
+}
+
+.info-card {
+    background: white;
+    border-radius: 4px;
+    padding: 12px;
+    box-shadow: none;
+    border: 1px solid #ccc;
+    margin-bottom: 16px;
+}
+
+.info-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: #7c7c7c;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.profile-bio {
+    font-size: 14px;
+    color: #1c1c1c;
+    line-height: 21px;
+    margin-bottom: 12px;
+}
+
+/* Stats (Follow) */
+.stats-grid {
+    display: flex;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+    margin-top: 12px;
+}
+
+.stat-box {
+    flex: 1;
+    cursor: pointer;
+    text-align: center; /* Căn giữa nội dung */
+    transition: opacity 0.2s;
+}
+
+.stat-box:hover {
+    opacity: 0.7;
+}
+
+/* Số lượng (To hơn) */
+.stat-num {
+    display: block;
+    font-weight: 800; /* Đậm hơn để nổi bật */
+    color: #1c1c1c;
+    font-size: 16px; /* Giữ nguyên hoặc tăng nhẹ nếu muốn */
+    line-height: 1.2;
+}
+
+/* Nhãn (Nhỏ lại theo yêu cầu) */
+.stat-label {
+    display: block; /* Xuống dòng */
+    font-size: 11px; /* <--- GIẢM SIZE TẠI ĐÂY (Cũ là 12px/14px) */
+    color: #7c7c7c;
+    font-weight: 500;
+    text-transform: uppercase; /* Chữ in hoa trông sẽ sang hơn khi để nhỏ */
+    letter-spacing: 0.5px; /* Dãn chữ nhẹ cho dễ đọc */
+    margin-top: 2px;
+}
+
+/* Tags */
+.comm-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.comm-tag {
+    background: #f6f7f8;
+    color: #1c1c1c;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid transparent;
+}
+.comm-tag:hover {
+    background: #e3e5e8;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .profile-info-wrapper { flex-direction: column; align-items: flex-start; }
+    .profile-details { margin-left: 0; margin-top: 0; width: 100%; }
+    .profile-actions { margin-top: 10px; width: 100%; }
+    .action-btn { width: 100%; }
+    .profile-content { flex-direction: column-reverse; }
+    .profile-sidebar { width: 100%; }
+    .profile-avatar-container { margin-top: -50px; }
+}

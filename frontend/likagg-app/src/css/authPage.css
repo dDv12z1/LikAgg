@@ -1,0 +1,150 @@
+/* src/css/authPage.css */
+
+/* --- Layout chính --- */
+.auth-page-wrapper {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg, #f0f4f8 0%, #d9e2ec 100%); /* Nền sáng nhẹ */
+    position: relative;
+    overflow: hidden; /* Để cắt phần sóng thừa */
+    padding: 20px;
+}
+
+/* --- Khung Form (White Card) --- */
+.auth-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); /* Bóng đổ mềm mại */
+    color: #333;
+    z-index: 10; /* Đảm bảo form nằm trên sóng */
+    position: relative;
+    animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.auth-title {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #0079d3; /* Màu xanh thương hiệu */
+}
+
+/* --- Input Styles (Light Theme) --- */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 14px 15px;
+    background: #f7f9fc;
+    border: 2px solid #eef2f6;
+    border-radius: 8px;
+    color: #333;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.auth-input::placeholder {
+    color: #a0aec0;
+}
+
+.auth-input:focus {
+    background: #fff;
+    border-color: #0079d3;
+    box-shadow: 0 0 0 4px rgba(0, 121, 211, 0.1);
+}
+
+/* --- Button Styles --- */
+.auth-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #0079d3 0%, #005fa3 100%);
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 10px;
+}
+
+.auth-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 121, 211, 0.3);
+}
+
+.auth-btn:active {
+    transform: translateY(0);
+}
+
+/* --- Footer & Links --- */
+.auth-footer {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 14px;
+    color: #666;
+}
+
+.auth-link {
+    color: #0079d3;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
+}
+
+.error-msg {
+    background: #fff5f5;
+    border: 1px solid #feb2b2;
+    color: #c53030;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* --- SÓNG (Waves Animation) --- */
+.waves-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    line-height: 0; /* Loại bỏ khoảng trắng */
+    z-index: 1; /* Nằm dưới form */
+}
+
+.wave-svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 150px;
+}
+
+.wave-path {
+    animation: moveWave 15s linear infinite;
+}
+
+/* Tạo hiệu ứng sóng trôi nhẹ (nếu muốn phức tạp hơn có thể dùng translate) */
+@keyframes moveWave {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-25px); }
+    100% { transform: translateX(0); }
+}

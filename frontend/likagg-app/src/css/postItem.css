@@ -1,0 +1,218 @@
+/* Khung bao quanh bài đăng */
+.post-card {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.post-card:hover {
+    border-color: #898989;
+}
+
+/* --- PHẦN 1: HEADER --- */
+.post-header {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.post-avatar {
+    width: 20px;
+    height: 20px;
+    background-color: #ff4500;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin-right: 8px;
+    font-size: 10px;
+}
+
+.post-info {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Cho phép xuống dòng nếu tên quá dài trên mobile */
+}
+
+.post-author {
+    font-weight: 700;
+    color: #1c1c1c;
+    margin-right: 4px;
+    text-decoration: none;
+}
+
+.post-time {
+    color: #787c7e;
+}
+
+.btn-follow {
+    background-color: #0045ac;
+    color: white;
+    border: none;
+    border-radius: 99px;
+    padding: 2px 8px;
+    font-weight: 700;
+    font-size: 10px;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: background-color 0.2s;
+}
+
+/* --- PHẦN 2: BODY --- */
+.post-body {
+    padding: 0 8px 8px 8px;
+    cursor: pointer; /* Thêm con trỏ tay để biết bấm được */
+}
+
+.post-title {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    color: #222;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+    padding-right: 5px;
+    word-wrap: break-word; 
+}
+
+.post-content-text {
+    font-size: 14px;
+    line-height: 21px;
+    color: #1c1c1c;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+
+.post-image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    margin-top: 10px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.post-image {
+    max-width: 100%;
+    max-height: 512px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+/* Link preview */
+.link-preview {
+    display: flex;
+    align-items: center;
+    color: #0079d3;
+    font-size: 13px;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Cắt chữ bằng dấu ... nếu dài quá */
+    margin-top: 5px;
+    max-width: 100%; /* Đảm bảo không tràn */
+}
+
+/* --- PHẦN 3: FOOTER (Vote Outline) --- */
+.post-footer {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 8px 12px;
+    border-top: 1px solid #f0f0f0;
+    flex-wrap: wrap; /* Cho phép các nút xuống dòng nếu màn hình quá bé */
+    gap: 5px;
+}
+
+.vote-group {
+    display: flex;
+    align-items: center;
+    background-color: #f6f7f8;
+    border-radius: 99px;
+    padding: 2px;
+    margin-right: 10px; /* Giảm margin trên mobile */
+    border: 1px solid transparent;
+}
+
+.vote-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 6px 8px; /* Giảm padding chút */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #878a8c;
+}
+
+.vote-icon {
+    font-size: 20px;
+    line-height: 1;
+}
+
+.vote-score {
+    font-size: 14px;
+    font-weight: 700;
+    min-width: 20px;
+    text-align: center;
+    margin: 0 4px;
+    color: #1c1c1c;
+}
+
+.vote-score.score-up { color: #ff4500; }
+.vote-score.score-down { color: #7193ff; }
+
+/* Các nút hành động khác */
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background-color: #f6f7f8;
+    border: none;
+    border-radius: 99px;
+    color: #878a8c;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 8px;
+}
+
+.action-icon {
+    font-size: 18px;
+}
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 480px) {
+    .post-title {
+        font-size: 16px; /* Giảm cỡ chữ tiêu đề trên mobile */
+    }
+    
+    .post-footer {
+        justify-content: space-between; /* Căn đều các nút */
+    }
+    
+    .action-btn {
+        margin-right: 0; /* Bỏ margin phải để căn đều */
+        padding: 8px 10px; /* Giảm padding nút */
+    }
+    
+    .action-btn span:not(.action-icon) {
+        display: none; /* Ẩn chữ "Bình luận", "Chia sẻ", chỉ hiện Icon để tiết kiệm chỗ */
+    }
+}
